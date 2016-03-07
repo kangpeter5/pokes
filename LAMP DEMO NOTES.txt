@@ -1,0 +1,84 @@
+LAMP DEMO NOTES
+
+cd pem\ files/
+ssh -i red_proj.pem ubuntu@52.26.202.47
+
+sudo -s //no need to run sudo anymore
+apt-get update
+apt-get install lamp-server^
+apt-get install git //or gitbash
+
+cd /
+ls
+//start here
+cd /var/www/
+cd html
+vi index.html
+get github http and input it here
+	git clone //http address//
+rm index.html
+cd /etc/apache2/sud
+cd sites-enabled
+vi 000-default.conf 
+
+click "INSERT" button
+
+Look for: DocumentRoot /var/www/html within the 000-default.conf file and change it to: DocumentRoot /var/www/html/[github project name] Save and Exit
+Now this step is really important. If you renamed your CodeIgniter folder to something else, make sure that you tell 000-default.conf file about it. You can even remove the html folder within the www folder.
+You have the option to download the CodeIgniter application within the www folder instead of html and it would still work, just make sure 000-default.conf file knows where it's at. Example: DocumentRoot /var/www/myfirstinstance
+
+"SHIFT" + ":"
+wq
+
+sudo service apache2 restart
+
+Now go visit your site by just typing in the public IP in your browser. YAAAY!
+
+export all files form mysqlworkbench into sublime file
+/usr/bin/mysql -uroot -p
+dump sql data via "paste"
+exit //type this out
+
+
+if issues with models
+cd /var/www/
+cd html
+cd [github project name]
+cd application
+cd models
+
+since using htaccess
+
+sudo a2enmod rewrite
+sudo service apache2 restart
+
+cd /etc/apache2
+sudo vi apache2.conf
+
+This is a large file so let's search for the part of the file where it says something with 'root.' We can do this in vi by running this command while you are in normal mode.
+
+/root
+Then go down a few more lines until you see something like this
+
+<Directory /var/www/>
+    Options Indexes FollowSymLinks
+    AllowOverride None
+    Require all granted
+</Directory>
+
+//Change it to this
+<Directory /var/www/>
+    Options Indexes FollowSymLinks
+    AllowOverride All
+    Require all granted
+</Directory>
+
+sudo service apache2 restart
+
+sign into godaddy
+
+manage domains
+setting icon and mange DNS
+edit record  to "points to" ip adddress :52.36.109.86
+save changes
+refresh browser
